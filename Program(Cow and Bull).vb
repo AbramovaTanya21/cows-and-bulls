@@ -52,7 +52,7 @@ Module Program
             Console.WriteLine("Молодец. Ты угадал за {0} ходов", Hod)
             Hod = 0
             Console.WriteLine()
-            Console.WriteLine("Хочешь сыграть еще раз? НАжми:(y(да),n(нет))")
+            Console.WriteLine("Хочешь сыграть еще раз? Нажми:(y(да),n(нет))")
             Do
                 k = Console.ReadKey(True)
             Loop Until k.KeyChar = "n"c Or k.KeyChar = "y"c
