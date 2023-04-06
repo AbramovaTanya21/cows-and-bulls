@@ -11,43 +11,56 @@ Module Program
         Dim Rgh As Integer
         Dim Hod As Integer
 
-        Randomize()
+        Dim k As ConsoleKeyInfo
         Do
-            namber = Int((9000 * Rnd()) + 1000)
-            Console.WriteLine(namber)
-        Loop Until Not ChackDublicates(namber)
+            Randomize()
+            Do
+                namber = Int((9000 * Rnd()) + 1000)
+                Console.WriteLine(namber)
+            Loop Until Not ChackDublicates(namber)
 
-        Console.WriteLine("Привет, попробуй угадать загаданное четырехзначное число!")
+            Console.WriteLine("Привет, попробуй угадать загаданное четырехзначное число!")
 
-        Do
-            Console.WriteLine("Введи число")
-            ver = Console.ReadLine()
+            Do
+                Console.WriteLine("Введи число")
+                ver = Console.ReadLine()
 
 
-            If IsCorrect(ver) Then
-                For m As Integer = 0 To 3
-                    For i As Integer = 0 To 3
-                        If ver.Chars(m) = namber.Chars(i) Then
-                            If i = m Then
-                                bull += 1
-                            Else
-                                cow += 1
+                If IsCorrect(ver) Then
+                    For m As Integer = 0 To 3
+                        For i As Integer = 0 To 3
+                            If ver.Chars(m) = namber.Chars(i) Then
+                                If i = m Then
+                                    bull += 1
+                                Else
+                                    cow += 1
+                                End If
+                                Rgh = bull + cow
                             End If
-                            Rgh = bull + cow
-                        End If
+                        Next
                     Next
-                Next
-                Console.WriteLine("В вашем числе {0} быков и {1} коров, всего правильных ответов {2}, за {3} ход", bull, cow, Rgh, Hod + 1)
-                bull = 0
-                cow = 0
-                Rgh = 0
-            Else
-                Console.WriteLine("Введено не коректное число!")
-            End If
+                    Console.WriteLine("В вашем числе {0} быков и {1} коров, всего правильных ответов {2}, за {3} ход", bull, cow, Rgh, Hod + 1)
+                    bull = 0
+                    cow = 0
+                    Rgh = 0
+                Else
+                    Console.WriteLine("Введено не коректное число!")
+                End If
 
-            Hod += 1
-        Loop Until ver = namber
-        Console.WriteLine("Молодец. Ты угадал за {0} ходов", Hod)
+                Hod += 1
+            Loop Until ver = namber
+            Console.WriteLine("Молодец. Ты угадал за {0} ходов", Hod)
+            Hod = 0
+            Console.WriteLine()
+            Console.WriteLine("Хочешь сыграть еще раз? НАжми:(y(да),n(нет))")
+            Do
+                k = Console.ReadKey(True)
+            Loop Until k.KeyChar = "n"c Or k.KeyChar = "y"c
+            Console.Clear()
+
+        Loop Until k.KeyChar = "n"c
+        Console.WriteLine(k)
+
     End Sub
     Function ChackDublicates(List As String) As Boolean
         ChackDublicates = False
