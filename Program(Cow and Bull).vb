@@ -1,9 +1,10 @@
 ﻿Imports System
+Imports System.ComponentModel
 
 Module Program
+    Const Lent As Byte = 5
     Sub Main(args As String())
 
-        '//TODO: Генерируем код
         Dim ver As String
         Dim namber As String
         Dim cow As Integer = 0
@@ -12,10 +13,11 @@ Module Program
         Dim Hod As Integer
 
         Dim k As ConsoleKeyInfo
+        Randomize()
         Do
-            Randomize()
+
             Do
-                namber = Int((9000 * Rnd()) + 1000)
+                namber = Int((9 * 10 ^ (Lent - 1)) * Rnd()) + Math.Pow(10, (Lent - 1))
                 Console.WriteLine(namber)
             Loop Until Not ChackDublicates(namber)
 
@@ -27,8 +29,8 @@ Module Program
 
 
                 If IsCorrect(ver) Then
-                    For m As Integer = 0 To 3
-                        For i As Integer = 0 To 3
+                    For m As Integer = 0 To Lent - 1
+                        For i As Integer = 0 To Lent - 1
                             If ver.Chars(m) = namber.Chars(i) Then
                                 If i = m Then
                                     bull += 1
@@ -64,8 +66,8 @@ Module Program
     End Sub
     Function ChackDublicates(List As String) As Boolean
         ChackDublicates = False
-        For n As Integer = 1 To 3
-            For i As Integer = n To 3
+        For n As Integer = 1 To Lent - 1
+            For i As Integer = n To Lent - 1
                 If List.Chars(n - 1) = List.Chars(i) Then
                     ChackDublicates = True
                     Exit Function
@@ -74,7 +76,7 @@ Module Program
         Next
     End Function
     Function IsCorrect(ver As String) As Boolean
-        If Len(ver) <> 4 Then Return False
+        If Len(ver) <> Lent Then Return False
 
         'Try
         '    Dim Test As Integer = CInt(ver)
